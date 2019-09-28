@@ -1,4 +1,5 @@
 <ul *ngFor="let blog of (blogs$ | async)">
     <li>{{blog.id}}</li>
     <li>{{blog.title}}</li>
+    <li> <a [routerLink]="['/posts', blog.id]">Read More</a></li>
 </ul>
