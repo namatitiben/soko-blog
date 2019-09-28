@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BlogService {
-
+  
   constructor(private httpService: HttpService) { }
 
   public getBlog(id:number): Observable<any> {
@@ -15,5 +15,9 @@ export class BlogService {
 
   public getBlogs(): Observable<any> {
     return this.httpService.makeRequest('GET', '/posts');
+  }
+
+  public getBlogPhotos(id: number): Observable<any> {
+    return this.httpService.makeRequest('GET', `/photos?albumId=${id}`);
   }
 }
