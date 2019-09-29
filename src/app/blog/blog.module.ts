@@ -4,6 +4,7 @@ import { BlogListComponent } from './blog-list/blog-list.component';
 import { RouterModule } from '@angular/router';
 import { BlogItemComponent } from './blog-item/blog-item.component';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
+import { MatCardModule } from '@angular/material'
 
 
 
@@ -11,7 +12,8 @@ import { BlogDetailsComponent } from './blog-details/blog-details.component';
   declarations: [BlogListComponent, BlogItemComponent, BlogDetailsComponent],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    MatCardModule
   ],
   exports: [BlogListComponent]
 })

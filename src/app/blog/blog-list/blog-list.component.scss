@@ -1,4 +1,10 @@
-.blog-container-row{
-    margin-left: 0px;
-    margin-right: 0px;
+.blog-container-row {
+  margin-left: 0px;
+  margin-right: 0px;
+  background-color: #ffffff;
+}
+
+.blog-item-container{
+  display: table-cell;
+  margin-bottom: 30px !important;
 }

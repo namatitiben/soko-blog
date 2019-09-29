@@ -17,7 +17,7 @@ import { BlogModule } from 'src/app/blog/blog.module';
     BlogModule,
     MatIconModule,
     MatToolbarModule,
-    MatSidenavModule,
+    MatSidenavModule
   ]
 })
 export class UserLayoutModule { }
