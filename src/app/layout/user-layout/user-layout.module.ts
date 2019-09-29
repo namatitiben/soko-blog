@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatIconModule, MatToolbarModule, MatSidenavModule } from '@angular/material'
 
 import { UserLayoutRoutingModule } from './user-layout-routing.module';
 import { UserHeaderComponent } from './user-header/user-header.component';
@@ -14,6 +15,9 @@ import { BlogModule } from 'src/app/blog/blog.module';
     CommonModule,
     UserLayoutRoutingModule,
     BlogModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatSidenavModule,
   ]
 })
 export class UserLayoutModule { }

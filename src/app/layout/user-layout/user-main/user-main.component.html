@@ -1,9 +1,9 @@
 <div class="container main-container">
-    <app-user-header></app-user-header>
-    <div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
-            <router-outlet></router-outlet>
-        </div>
-    </div>
-    <app-user-footer></app-user-footer>
+  <app-user-header></app-user-header>
+
+  <mat-sidenav-container fxFlexFill>
+    <mat-sidenav-content fxFlexFill class="main-page-container">
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

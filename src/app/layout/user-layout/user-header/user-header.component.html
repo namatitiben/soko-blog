@@ -1,1 +1,12 @@
-<p>user-header works!</p>
+<mat-toolbar color="primary" class="user-toolbar-container">
+    <mat-toolbar-row>
+        <span>
+            <a [routerLink]="['/home']"><img src="assets/images/logo.png" alt="logo" class="responsive logo" /></a>
+        </span>
+        <span class="menu-spacer"></span>
+        <div fxShow="true" fxHide.lt-md>
+            <a [routerLink]="['/home']" routerLinkActive="active" class="user-links mat-button mat-button-base" mat-button>Blogs</a>
+            <a [routerLink]="['/admin']" routerLinkActive="active" class="user-links mat-button mat-button-base" mat-button>Admin</a>
+        </div>
+    </mat-toolbar-row>
+</mat-toolbar>
