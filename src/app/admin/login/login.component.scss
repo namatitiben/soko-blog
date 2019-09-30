@@ -1,0 +1,31 @@
+.main-container{
+    max-width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.menu-spacer {
+    flex: 1 1 auto;
+}
+
+.user-toolbar-container {
+    background-color: #f4f4f4;
+    min-height: 60px;
+    border-bottom: 2px solid #f4f4f4;
+    margin-bottom: 30px;
+}
+
+.logo {
+    max-height: 30px;
+    margin-top: 10px;
+}
+
+.user-links{
+    color: #fd5224;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.user-links.active, .user-links:hover {
+    color: #e76743 !important;
+}

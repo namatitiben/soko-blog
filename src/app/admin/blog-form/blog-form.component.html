@@ -1,0 +1,27 @@
+<form [formGroup]="postForm" novalidate>
+  <div class="row">
+    <div class="col-12 form-group">
+      <label for="title">Title</label>
+      <input
+        id="title"
+        type="text"
+        class="form-control"
+        placeholder="title"
+        formControlName="title"
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <label for="body">Body</label>
+      <textarea
+        id="body"
+        rows="10"
+        placeholder="blog content"
+        class="form-control"
+        formControlName="body"
+      ></textarea>
+    </div>
+  </div>
+</form>
