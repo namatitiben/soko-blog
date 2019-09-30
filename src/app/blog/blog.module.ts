@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BlogListComponent } from './blog-list/blog-list.component';
 import { RouterModule } from '@angular/router';
+import { MatCardModule } from '@angular/material'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
+import { AlertModule } from 'ngx-bootstrap/alert';
+
+import { BlogListComponent } from './blog-list/blog-list.component';
 import { BlogItemComponent } from './blog-item/blog-item.component';
 import { BlogDetailsComponent } from './blog-details/blog-details.component';
-import { MatCardModule } from '@angular/material'
 
 
 
@@ -13,7 +17,10 @@ import { MatCardModule } from '@angular/material'
   imports: [
     CommonModule,
     RouterModule,
-    MatCardModule
+    MatCardModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AlertModule.forRoot()
   ],
   exports: [BlogListComponent]
 })

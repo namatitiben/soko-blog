@@ -15,20 +15,56 @@
         </div>
         <div class="row blog-comment-input-row">
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-              <p class="small font-italic">Have a comment ?</p>
-            <form>
+            <p class="small font-italic">Have a comment ?</p>
+
+            <alert
+              type="success"
+              [dismissible]="true"
+              *ngIf="commentResp.success"
+            >
+              {{ commentResp.message }}
+            </alert>
+            <form [formGroup]="commentForm" novalidate (submit)="postComment()">
               <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                   <input
-                    class="form-control"                    
+                    class="form-control"
                     placeholder="Name"
+                    formControlName="name"
                   />
+                  <span
+                    class="small text-danger"
+                    *ngIf="submitted && commentForm.controls['name'].errors"
+                  >
+                    {{ formErrors.required }}
+                  </span>
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
                   <input
-                    class="form-control"                    
+                    class="form-control"
                     placeholder="Email address"
+                    formControlName="emailAddress"
                   />
+
+                  <span
+                    class="small text-danger"
+                    *ngIf="
+                      submitted && commentForm.controls['emailAddress'].errors
+                    "
+                  >
+                    <span
+                      *ngIf="
+                        commentForm.controls['emailAddress'].errors.required
+                      "
+                    >
+                      {{ formErrors.required }}
+                    </span>
+                    <span
+                      *ngIf="commentForm.controls['emailAddress'].errors.email"
+                    >
+                      {{ formErrors.invalidEmail }}
+                    </span>
+                  </span>
                 </div>
               </div>
               <div class="row form-field-row">
@@ -37,12 +73,23 @@
                     class="form-control"
                     row="5"
                     placeholder="type comment"
+                    formControlName="comment"
                   ></textarea>
+                  <span
+                    class="small text-danger"
+                    *ngIf="submitted && commentForm.controls['comment'].errors"
+                  >
+                    {{ formErrors.required }}
+                  </span>
                 </div>
               </div>
               <div class="row comment-btn-row">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right">
-                    <button class="btn btn-secondary">Send Comment</button>
+                <div
+                  class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right"
+                >
+                  <button type="submit" class="btn btn-secondary">
+                    Send Comment
+                  </button>
                 </div>
               </div>
             </form>
@@ -50,15 +97,12 @@
         </div>
 
         <div class="row">
-          <div class="col-2 mb-3" *ngFor="let photo of blogPhotos$ | async">
-            <a href="{{ photo.url }}" target="_blank">
-              <img
-                src="{{ photo.thumbnailUrl }}"
-                alt="{{ photo.title }}"
-                title="{{ photo.title }}"
-                class="img-thumbnail"
-              />
-            </a>
+          <div
+            class="col-12 mb-3"
+            *ngFor="let comment of blogService.comments"
+          >
+            <p class="comment-body">{{ comment.body }}</p>
+            <p class="small font-italic">By: {{ comment.name }}</p>
           </div>
         </div>
       </div>
@@ -66,9 +110,15 @@
   </div>
   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 comments-row">
     <div class="row">
-      <div class="col-12 mb-3" *ngFor="let comment of blogComnments$ | async">
-        <p class="comment-body">{{ comment.body }}</p>
-        <p class="small font-italic">By: {{ comment.name }}</p>
+      <div class="col-6 mb-3" *ngFor="let photo of blogPhotos$ | async">
+        <a href="{{ photo.url }}" target="_blank">
+          <img
+            src="{{ photo.thumbnailUrl }}"
+            alt="{{ photo.title }}"
+            title="{{ photo.title }}"
+            class="img-thumbnail"
+          />
+        </a>
       </div>
     </div>
   </div>

@@ -15,8 +15,8 @@ export class HttpService {
    * @param method 
    * @param endPoint 
    */
-  public makeRequest(method:string, endPoint:string){
-    return this.http.request(method, `${environment.baseUrl}${endPoint}`);
+  public makeRequest(method:string, endPoint:string, body?: any){
+    return this.http.request(method, `${environment.baseUrl}${endPoint}`, { body:body });
   }
 
   

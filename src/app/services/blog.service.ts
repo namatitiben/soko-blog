@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BlogService {
+  blogs: any[] = [];
+  comments: any[] = [];
   
   constructor(private httpService: HttpService) { }
 
@@ -23,5 +25,9 @@ export class BlogService {
 
   public getBlogComments(id: number): Observable<any> {
     return this.httpService.makeRequest('GET', `/posts/${id}/comments`);
+  }
+
+  public postComment(data:any): Observable<any> {
+    return this.httpService.makeRequest('POST', `/posts/${data.postId}/comments`, data);
   }
 }
