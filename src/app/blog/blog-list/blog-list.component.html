@@ -1,5 +1,5 @@
 <div class="row blog-container-row">
-    <div class="col-3 mb-3 blog-item-container" *ngFor="let blog of (blogs$ | async)">
+    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12 mb-3 blog-item-container" *ngFor="let blog of (blogs$ | async)">
         <app-blog-item [blog]="blog"></app-blog-item>
     </div>
 </div>

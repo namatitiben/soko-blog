@@ -1,0 +1,23 @@
+.blog-details-container{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.blog-title-row{
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+.blog-body-row{
+    font-size: 1.2em;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.comments-row{
+    max-height: 180vh;
+    overflow-y: auto;
+}
+.comment-body{
+    font-size:0.8em;
+}

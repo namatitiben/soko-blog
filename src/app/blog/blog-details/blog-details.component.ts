@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 export class BlogDetailsComponent implements OnInit {
   blog$:Observable<any>;
   blogPhotos$: Observable<any>;
+  blogComnments$: Observable<any>;
 
   constructor(private activatedRoute: ActivatedRoute, private blogService: BlogService) { }
 
@@ -18,6 +19,7 @@ export class BlogDetailsComponent implements OnInit {
     const blogId = this.activatedRoute.snapshot.params['id'];
     this.getBlog(blogId);
     this.getBlogPhotos(+blogId)
+    this.getBlogComments(+blogId);
   }
 
   private getBlog(id){
@@ -26,6 +28,10 @@ export class BlogDetailsComponent implements OnInit {
 
   private getBlogPhotos(id: number) {
     this.blogPhotos$ = this.blogService.getBlogPhotos(id);
+  }
+
+  private getBlogComments(id: number) {
+    this.blogComnments$ = this.blogService.getBlogComments(id);
   }
 
 }

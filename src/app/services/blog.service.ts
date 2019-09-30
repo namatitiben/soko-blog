@@ -20,4 +20,8 @@ export class BlogService {
   public getBlogPhotos(id: number): Observable<any> {
     return this.httpService.makeRequest('GET', `/photos?albumId=${id}`);
   }
+
+  public getBlogComments(id: number): Observable<any> {
+    return this.httpService.makeRequest('GET', `/posts/${id}/comments`);
+  }
 }
