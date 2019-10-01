@@ -9,11 +9,13 @@ import { BlogListComponent } from './blog-list/blog-list.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BlogFormComponent } from './blog-form/blog-form.component';
 
-
-
-
 @NgModule({
-  declarations: [LoginComponent, LoginFormComponent, BlogListComponent, BlogFormComponent],
+  declarations: [
+    LoginComponent,
+    LoginFormComponent,
+    BlogListComponent,
+    BlogFormComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -22,6 +24,6 @@ import { BlogFormComponent } from './blog-form/blog-form.component';
     FormsModule,
     ReactiveFormsModule,
     ModalModule.forRoot()
-  ],
+  ]
 })
-export class AdminModule { }
+export class AdminModule {}

@@ -1,19 +1,19 @@
-import { Component, OnInit, TemplateRef } from "@angular/core";
+import { Component, OnInit, TemplateRef } from '@angular/core';
 
-import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
-import { tap } from "rxjs/operators";
+import { tap } from 'rxjs/operators';
 
-import { BlogService } from "src/app/services/blog.service";
-import { Validators, FormGroup, FormBuilder } from "@angular/forms";
+import { BlogService } from 'src/app/services/blog.service';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: "app-blog-list",
-  templateUrl: "./blog-list.component.html",
-  styleUrls: ["./blog-list.component.scss"]
+  selector: 'app-blog-list',
+  templateUrl: './blog-list.component.html',
+  styleUrls: ['./blog-list.component.scss']
 })
 export class BlogListComponent implements OnInit {
-  userId = 1;
+  userId: number;
   modalRef: BsModalRef;
 
   selectedBlog: any;
@@ -21,11 +21,14 @@ export class BlogListComponent implements OnInit {
 
   constructor(
     private modalService: BsModalService,
-    private blogService: BlogService,
+    public blogService: BlogService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit() {
+    //get logged user
+    const user: any = JSON.parse(localStorage.getItem('user'));
+    this.userId = user.id;
     this.initPostForm();
     //get blogs
     this.getBlogs();
@@ -36,25 +39,21 @@ export class BlogListComponent implements OnInit {
    */
   initPostForm() {
     this.postForm = this.fb.group({
-      id: [
-        (this.selectedBlog && this.selectedBlog.id ) || null
-      ],
-      userId: [
-        (this.selectedBlog && this.selectedBlog.userId) || this.userId
-      ],
+      id: [(this.selectedBlog && this.selectedBlog.id) || null],
+      userId: [(this.selectedBlog && this.selectedBlog.userId) || this.userId],
       title: [
-        (this.selectedBlog && this.selectedBlog.title) || "",
+        (this.selectedBlog && this.selectedBlog.title) || '',
         Validators.required
       ],
       body: [
-        (this.selectedBlog && this.selectedBlog.body) || "",
+        (this.selectedBlog && this.selectedBlog.body) || '',
         Validators.required
       ]
     });
   }
 
   /**
-   * Get list of blogs from 
+   * Get list of blogs from
    */
   getBlogs() {
     const sub = this.blogService
@@ -78,30 +77,32 @@ export class BlogListComponent implements OnInit {
       if (this.selectedBlog) {
         // update
         const sub = this.blogService
-        .updateBlog(this.postForm.value )
-        .pipe(
-          tap(blog => {
-            // add new blog to the list
-            const index = this.blogService.blogs.findIndex(item => item.id === blog.id);
-            this.blogService.blogs[index] = blog;
+          .updateBlog(this.postForm.value)
+          .pipe(
+            tap(blog => {
+              // add new blog to the list
+              const index = this.blogService.blogs.findIndex(
+                item => item.id === blog.id
+              );
+              this.blogService.blogs[index] = blog;
 
-            if(sub){
-              sub.unsubscribe();
-            }
-          })
-        )
-        .subscribe();
+              if (sub) {
+                sub.unsubscribe();
+              }
+            })
+          )
+          .subscribe();
       } else {
         delete this.postForm.value.id;
 
         // create
         const sub = this.blogService
-          .createBlog(this.postForm.value )
+          .createBlog(this.postForm.value)
           .pipe(
             tap(blog => {
               // add new blog to the list
               this.blogService.blogs = [blog, ...this.blogService.blogs];
-              if(sub){
+              if (sub) {
                 sub.unsubscribe();
               }
             })
@@ -134,7 +135,7 @@ export class BlogListComponent implements OnInit {
 
   /**
    * Opens the delete confirmation modal
-   * @param template 
+   * @param template
    */
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);

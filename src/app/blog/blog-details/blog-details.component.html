@@ -97,10 +97,7 @@
         </div>
 
         <div class="row">
-          <div
-            class="col-12 mb-3"
-            *ngFor="let comment of blogService.comments"
-          >
+          <div class="col-12 mb-3" *ngFor="let comment of blogService.comments">
             <p class="comment-body">{{ comment.body }}</p>
             <p class="small font-italic">By: {{ comment.name }}</p>
           </div>

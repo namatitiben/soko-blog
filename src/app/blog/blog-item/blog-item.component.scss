@@ -1,20 +1,19 @@
-
 .example-card {
-    max-width: 400px;
-    height: 100%;
-  }
-  
-  .example-header-image {
-    background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
-    background-size: cover;
-  }
-  
-  .read-more-btn{
-    background-color: #fd5224;
-    color: #ffffff;
-  }
-  .blog-title-link{
-    color: rgba(0,0,0,.87);
-    outline: none;
-    text-decoration: none;
-  }
+  max-width: 400px;
+  height: 100%;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
+
+.read-more-btn {
+  background-color: #fd5224;
+  color: #ffffff;
+}
+.blog-title-link {
+  color: rgba(0, 0, 0, 0.87);
+  outline: none;
+  text-decoration: none;
+}

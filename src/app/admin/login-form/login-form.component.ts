@@ -32,6 +32,9 @@ export class LoginFormComponent implements OnInit {
     this.initForm();
   }
 
+  /**
+   * Initiali login form
+   */
   initForm() {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.email]],
@@ -39,6 +42,9 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
+  /**
+   * Login api integration
+   */
   login() {
     this.submitted = true;
     this.loginResp.error = false;

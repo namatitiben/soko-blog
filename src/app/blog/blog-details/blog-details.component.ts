@@ -1,17 +1,17 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Observable } from "rxjs";
-import { tap, catchError } from "rxjs/operators";
+import { Observable } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
 
-import { BlogService } from "src/app/services/blog.service";
-import { Comment } from "src/app/models/comment";
+import { BlogService } from 'src/app/services/blog.service';
+import { Comment } from 'src/app/models/comment';
 
 @Component({
-  selector: "app-blog-details",
-  templateUrl: "./blog-details.component.html",
-  styleUrls: ["./blog-details.component.scss"]
+  selector: 'app-blog-details',
+  templateUrl: './blog-details.component.html',
+  styleUrls: ['./blog-details.component.scss']
 })
 export class BlogDetailsComponent implements OnInit {
   dismissible = true;
@@ -25,12 +25,12 @@ export class BlogDetailsComponent implements OnInit {
   commentResp: any = {
     success: false,
     fail: false,
-    message: ""
+    message: ''
   };
 
   formErrors: any = {
-    required: "This field is required",
-    invalidEmail: "Invalid email address"
+    required: 'This field is required',
+    invalidEmail: 'Invalid email address'
   };
 
   constructor(
@@ -40,7 +40,7 @@ export class BlogDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.blogId = this.activatedRoute.snapshot.params["id"];
+    this.blogId = this.activatedRoute.snapshot.params['id'];
     this.getBlog(this.blogId);
     this.getBlogPhotos(+this.blogId);
     this.getBlogComments(+this.blogId);
@@ -52,30 +52,50 @@ export class BlogDetailsComponent implements OnInit {
    */
   initForm() {
     this.commentForm = this.fb.group({
-      name: ["", Validators.required],
-      emailAddress: ["", [Validators.required, Validators.email]],
-      comment: ["", Validators.required]
+      name: ['', Validators.required],
+      emailAddress: ['', [Validators.required, Validators.email]],
+      comment: ['', Validators.required]
     });
   }
 
+  /**
+   * Get post by id
+   * @param id
+   */
   private getBlog(id) {
     this.blog$ = this.blogService.getBlog(id);
   }
 
+  /**
+   * Get post photos
+   * @param id
+   */
   private getBlogPhotos(id: number) {
     this.blogPhotos$ = this.blogService.getBlogPhotos(id);
   }
 
+  /**
+   * Get post comments
+   * @param id
+   */
   private getBlogComments(id: number) {
-    const sub = this.blogService.getBlogComments(id).pipe(tap(comments => {
-      this.blogService.comments = comments;
+    const sub = this.blogService
+      .getBlogComments(id)
+      .pipe(
+        tap(comments => {
+          this.blogService.comments = comments;
 
-      if (sub) {
-        sub.unsubscribe();
-      }
-    })).subscribe();
+          if (sub) {
+            sub.unsubscribe();
+          }
+        })
+      )
+      .subscribe();
   }
 
+  /**
+   * Create post comments
+   */
   postComment() {
     this.submitted = true;
     this.commentResp.success = false;
@@ -96,11 +116,11 @@ export class BlogDetailsComponent implements OnInit {
       .postComment(data)
       .pipe(
         tap(comment => {
-          this.updateComments(comment);          
+          this.updateComments(comment);
 
           this.submitted = false;
           this.commentResp.success = true;
-          this.commentResp.message = "Comment successfully posted";
+          this.commentResp.message = 'Comment successfully posted';
           this.commentForm.reset();
           //unsubscribe from the subscription
           if (sub) {
@@ -111,7 +131,11 @@ export class BlogDetailsComponent implements OnInit {
       .subscribe();
   }
 
+  /**
+   * Update comments
+   * @param newComment
+   */
   private updateComments(newComment) {
-    this.blogService.comments = [newComment, ...this.blogService.comments]
+    this.blogService.comments = [newComment, ...this.blogService.comments];
   }
 }

@@ -10,14 +10,16 @@ import { Observable } from 'rxjs';
 export class BlogListComponent implements OnInit {
   public blogs$: Observable<any>;
 
-  constructor(private blogService: BlogService) { }
+  constructor(private blogService: BlogService) {}
 
   ngOnInit() {
     this.getBlogs();
   }
 
+  /**
+   * Get blog posts
+   */
   public getBlogs() {
     this.blogs$ = this.blogService.getBlogs();
   }
-
 }

@@ -9,8 +9,7 @@ import { FormGroup } from '@angular/forms';
 export class BlogFormComponent implements OnInit {
   @Input() postForm: FormGroup;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

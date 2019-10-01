@@ -21,7 +21,9 @@
           />
           <span
             class="small text-danger"
-            *ngIf="submitted && loginForm.controls['username']?.errors?.required"
+            *ngIf="
+              submitted && loginForm.controls['username']?.errors?.required
+            "
           >
             {{ formErrors.required }}
           </span>
@@ -42,7 +44,9 @@
           />
           <span
             class="small text-danger"
-            *ngIf="submitted && loginForm.controls['password']?.errors?.required"
+            *ngIf="
+              submitted && loginForm.controls['password']?.errors?.required
+            "
           >
             {{ formErrors.required }}
           </span>

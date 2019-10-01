@@ -77,38 +77,38 @@
 
 <!--Post Modal-->
 <ng-template #post>
-    <div bsModal (onHidden)="selectedBlog=null; initPostForm();">
-        <div class="modal-header">
-          <h4 class="modal-title pull-left">Post</h4>
-          <button
-            type="button"
-            class="close pull-right"
-            aria-label="Close"
-            (click)="modalRef.hide()"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <app-blog-form [postForm]="postForm"></app-blog-form>
-        </div>
-        <div class="modal-footer">
-          <button
-            *ngIf="modalRef"
-            type="button"
-            class="btn btn-sm btn-secondary"
-            (click)="onPostModalClose()"
-          >
-            Cancel
-          </button>
-          <button
-            *ngIf="modalRef"
-            type="button"
-            class="btn btn-sm btn-primary"
-            (click)="postBlog()"
-          >
-            Save
-          </button>
-        </div>
+  <div bsModal (onHidden)="selectedBlog = null; initPostForm()">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Post</h4>
+      <button
+        type="button"
+        class="close pull-right"
+        aria-label="Close"
+        (click)="modalRef.hide()"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
+    <div class="modal-body">
+      <app-blog-form [postForm]="postForm"></app-blog-form>
+    </div>
+    <div class="modal-footer">
+      <button
+        *ngIf="modalRef"
+        type="button"
+        class="btn btn-sm btn-secondary"
+        (click)="onPostModalClose()"
+      >
+        Cancel
+      </button>
+      <button
+        *ngIf="modalRef"
+        type="button"
+        class="btn btn-sm btn-primary"
+        (click)="postBlog()"
+      >
+        Save
+      </button>
+    </div>
+  </div>
 </ng-template>
