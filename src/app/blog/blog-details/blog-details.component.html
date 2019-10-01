@@ -1,7 +1,7 @@
 <div class="row blog-details-container">
   <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
   <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7 col-7">
-    <div class="row blog-item-container-row" *ngIf="blog$ | async as blog">
+    <div class="row blog-item-container-row" *ngIf="blog$ | async as blog; else showSpinner">
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="row blog-title-row">
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -121,3 +121,9 @@
   </div>
   <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1"></div>
 </div>
+
+<ng-template #showSpinner>
+  <div class="text-center">
+    <img src="assets/images/ajax-loader.gif" alt="Fetching...">
+  </div>
+</ng-template>
