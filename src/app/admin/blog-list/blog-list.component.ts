@@ -31,6 +31,9 @@ export class BlogListComponent implements OnInit {
     this.getBlogs();
   }
 
+  /**
+   * Create/update initialization form function
+   */
   initPostForm() {
     this.postForm = this.fb.group({
       id: [
@@ -50,6 +53,9 @@ export class BlogListComponent implements OnInit {
     });
   }
 
+  /**
+   * Get list of blogs from 
+   */
   getBlogs() {
     const sub = this.blogService
       .getBlogsByUserId(this.userId)
@@ -64,6 +70,9 @@ export class BlogListComponent implements OnInit {
       .subscribe();
   }
 
+  /**
+   * Create / Update post api integration
+   */
   postBlog() {
     if (this.postForm.valid) {
       if (this.selectedBlog) {
@@ -104,6 +113,9 @@ export class BlogListComponent implements OnInit {
     this.onPostModalClose();
   }
 
+  /**
+   * Delete post api integration function
+   */
   deleteBlog() {
     const sub = this.blogService
       .deletePost(this.selectedBlog.id)
@@ -120,15 +132,26 @@ export class BlogListComponent implements OnInit {
       .subscribe();
   }
 
+  /**
+   * Opens the delete confirmation modal
+   * @param template 
+   */
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
 
+  /**
+   * Open the post creation/updating form modal and reinitilizes the form
+   * @param post
+   */
   openPostModal(post: TemplateRef<any>) {
     this.initPostForm();
     this.modalRef = this.modalService.show(post);
   }
 
+  /**
+   * Close modal and reset the form
+   */
   onPostModalClose() {
     this.selectedBlog = null;
     this.modalRef.hide();

@@ -2,6 +2,10 @@
   <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12"></div>
   <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
     <form [formGroup]="loginForm" novalidate (submit)="login()">
+      <div class="alert alert-danger small" *ngIf="loginResp.error">
+        {{ loginResp.message }}
+      </div>
+
       <div class="row auth-form-label-row">
         <div class="col-12">
           Username
@@ -15,6 +19,12 @@
             placeholder="username"
             formControlName="username"
           />
+          <span
+            class="small text-danger"
+            *ngIf="submitted && loginForm.controls['username']?.errors?.required"
+          >
+            {{ formErrors.required }}
+          </span>
         </div>
       </div>
       <div class="row auth-form-label-row">
@@ -30,6 +40,12 @@
             placeholder="password"
             formControlName="password"
           />
+          <span
+            class="small text-danger"
+            *ngIf="submitted && loginForm.controls['password']?.errors?.required"
+          >
+            {{ formErrors.required }}
+          </span>
         </div>
       </div>
       <div class="row auth-form-btn-row">

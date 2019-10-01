@@ -2,36 +2,68 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { UserService } from 'src/app/services/user.service';
+import { tap } from 'rxjs/operators';
+
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
-
-  loginForm:FormGroup;
+  loginForm: FormGroup;
   submitted = false;
+  loginResp = {
+    error: false,
+    message: ''
+  };
+  formErrors = {
+    required: 'This field is required',
+    invalid_email: 'Email is invalid'
+  };
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
     this.initForm();
   }
 
-  initForm(){
+  initForm() {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
 
-  login(){
+  login() {
     this.submitted = true;
-    if(this.loginForm.invalid){
+    this.loginResp.error = false;
+    if (this.loginForm.invalid) {
       return;
     }
-    this.router.navigate(["/admin/blog-list"]);
-
+    const sub = this.userService
+      .getUsers()
+      .pipe(
+        tap(users => {
+          this.submitted = false;
+          const user = users.find(
+            user =>
+              user.email.toLowerCase() ===
+              this.loginForm.value.username.toLowerCase()
+          );
+          if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+            this.router.navigate(['/admin/blog-list']);
+          } else {
+            this.loginResp.error = true;
+            this.loginResp.message = 'Invalid login details';
+          }
+        })
+      )
+      .subscribe();
   }
-
 }
